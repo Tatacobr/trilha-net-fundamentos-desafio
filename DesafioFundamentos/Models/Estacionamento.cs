@@ -4,7 +4,7 @@ namespace DesafioFundamentos.Models
     {
         private decimal precoInicial = 0;
         private decimal precoPorHora = 0;
-        private List<string> veiculos = new List<string>();
+        private List<Veiculo> veiculos = new List<Veiculo>();
 
         public Estacionamento(decimal precoInicial, decimal precoPorHora)
         {
@@ -17,26 +17,26 @@ namespace DesafioFundamentos.Models
             // TODO: Pedir para o usuário digitar uma placa (ReadLine) e adicionar na lista "veiculos"
             // *IMPLEMENTE AQUI*
             Console.WriteLine("Digite a placa do veículo para estacionar:");
+
+            this.veiculos.Add(new Veiculo(Console.ReadLine(), DateTime.Now));
+
         }
 
         public void RemoverVeiculo()
         {
             Console.WriteLine("Digite a placa do veículo para remover:");
-
-            // Pedir para o usuário digitar a placa e armazenar na variável placa
-            // *IMPLEMENTE AQUI*
-            string placa = "";
+            string placa = Console.ReadLine();
 
             // Verifica se o veículo existe
-            if (veiculos.Any(x => x.ToUpper() == placa.ToUpper()))
+            if (veiculos.Any(x => x.Placa.ToUpper() == placa.ToUpper()))
             {
                 Console.WriteLine("Digite a quantidade de horas que o veículo permaneceu estacionado:");
 
                 // TODO: Pedir para o usuário digitar a quantidade de horas que o veículo permaneceu estacionado,
                 // TODO: Realizar o seguinte cálculo: "precoInicial + precoPorHora * horas" para a variável valorTotal                
                 // *IMPLEMENTE AQUI*
-                int horas = 0;
-                decimal valorTotal = 0; 
+                DateTime horas = DateTime.Now;
+                decimal valorTotal = 0;
 
                 // TODO: Remover a placa digitada da lista de veículos
                 // *IMPLEMENTE AQUI*
@@ -52,11 +52,13 @@ namespace DesafioFundamentos.Models
         public void ListarVeiculos()
         {
             // Verifica se há veículos no estacionamento
-            if (veiculos.Any())
-            {
+            if (veiculos.Any()){
                 Console.WriteLine("Os veículos estacionados são:");
                 // TODO: Realizar um laço de repetição, exibindo os veículos estacionados
-                // *IMPLEMENTE AQUI*
+                veiculos.ForEach( v => {
+                    Console.WriteLine($"Placa: {v.Placa} - Data: {v.Entrada.ToString("dd/MM/yyyy")} Horario: {v.Entrada.ToString("HH:mm")}");
+                });
+
             }
             else
             {
