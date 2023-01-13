@@ -22,7 +22,7 @@ namespace DesafioFundamentos.Models{
             if (veiculos.Any(x => x.Placa == placa)){
                 Veiculo veiculo = veiculos.Find(v => v.Placa == placa);
 
-                TimeSpan aux = DateTime.Now.AddHours(40) - veiculo.Entrada;
+                TimeSpan aux = DateTime.Now - veiculo.Entrada;
                 int horas = Convert.ToInt32(aux.TotalHours);
                 decimal valorTotal = this.precoInicial + (this.precoPorHora * horas);
 
